@@ -18,16 +18,40 @@ public class TrianglesApplicationTests {
 
 	private TriangleCalculator triangleCalculator;
 
+
+
 	@Autowired
 	public void setTriangleCalculator(TriangleCalculator triangleCalculator) {
 		this.triangleCalculator = triangleCalculator;
 	}
 
 	@Test
-	public void triangleWithEqualSidesIsEqualateral() {
+	public void triangleWithEqualSidesIsEqualateral() throws Exception {
 		Triangle triangle = new Triangle(1.5d,1.5d,1.5d);
 		triangleCalculator.determineTriangleType(triangle);
 		assertEquals(TriangleType.EQUILATERAL, triangle.getType());
+	}
+
+	@Test
+	public void triangleWithTwoEqualSidesIsIsosceles() throws Exception {
+		Triangle triangle = new Triangle(1.5d, 1.5d, 3d);
+		triangleCalculator.determineTriangleType(triangle);
+		assertEquals(TriangleType.ISOSCELES, triangle.getType());
+
+		Triangle secondTriangle = new Triangle(1.5d, 3d, 3d);
+		triangleCalculator.determineTriangleType(secondTriangle);
+		assertEquals(TriangleType.ISOSCELES, secondTriangle.getType());
+
+		Triangle thirdTriangle = new Triangle(1.5d, 3d, 1.5d);
+		triangleCalculator.determineTriangleType(thirdTriangle);
+		assertEquals(TriangleType.ISOSCELES, thirdTriangle.getType());
+	}
+
+	@Test
+	public void triangleWithNoEqualSidesIsScalene() throws Exception {
+		Triangle triangle = new Triangle(1.5d, 3d, 4.5d);
+		triangleCalculator.determineTriangleType(triangle);
+		assertEquals(triangle.getType(), TriangleType.SCALENE);
 	}
 
 }
