@@ -16,7 +16,7 @@ public class TriangleCalcuatorStrategy implements TriangleCalculator{
         Double sideTwo = triangle.getSideTwo();
         Double sideThree = triangle.getSideThree();
         if (isValidTriangle(sideOne, sideTwo, sideThree)) {
-            if (isEqualateral(sideOne, sideTwo, sideThree)) {
+            if (isEquilateral(sideOne, sideTwo, sideThree)) {
                 triangle.setType(TriangleType.EQUILATERAL);
             } else if (isIsosceles(sideOne, sideTwo, sideThree)) {
                 triangle.setType(TriangleType.ISOSCELES);
@@ -40,7 +40,7 @@ public class TriangleCalcuatorStrategy implements TriangleCalculator{
 
     }
 
-    private boolean isEqualateral(Double sideOne, Double sideTwo, Double sideThree) {
+    private boolean isEquilateral(Double sideOne, Double sideTwo, Double sideThree) {
         return sideOne.equals(sideTwo) && sideOne.equals(sideThree);
     }
 

@@ -27,6 +27,10 @@ public class TrianglesApplication implements CommandLineRunner {
 			Triangle triangle = new Triangle(Double.valueOf(strings[0]), Double.valueOf(strings[1]),
 					Double.valueOf(strings[2]));
 			triangleCalculator.determineTriangleType(triangle);
+			String message = "-----------------------\n " +
+					         "The Triangle you entered is : " + triangle.getType().toString() + "\n" +
+					         "-----------------------\n ";
+			System.out.print(message);
 		} else {
 			System.out.print("There was either no input or an incorrect number of inputs.\n" +
 					"Please run the program again with 3 inputs.");
