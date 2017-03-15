@@ -11,25 +11,33 @@ import org.springframework.stereotype.Service;
 public class TriangleCalcuatorStrategy implements TriangleCalculator{
 
     @Override
-    public boolean isValidTriangle(Double sideOne, Double sideTwo, Double sideThree) {
-        return false;
-    }
-
-    private boolean checkSideInequality(Double hypotenuse, Double adjacent, Double opposite){
-    }
-
-    @Override
     public void determineTriangleType(Triangle triangle) {
         Double sideOne = triangle.getSideOne();
         Double sideTwo = triangle.getSideTwo();
         Double sideThree = triangle.getSideThree();
-        if (isEqualateral(sideOne, sideTwo, sideThree)) {
-            triangle.setType(TriangleType.EQUILATERAL);
-        } else if (isIsosceles(sideOne, sideTwo, sideThree)) {
-            triangle.setType(TriangleType.ISOSCELES);
-        } else if (isScalene(sideOne, sideTwo, sideThree)) {
-            triangle.setType(TriangleType.SCALENE);
+        if (isValidTriangle(sideOne, sideTwo, sideThree)) {
+            if (isEqualateral(sideOne, sideTwo, sideThree)) {
+                triangle.setType(TriangleType.EQUILATERAL);
+            } else if (isIsosceles(sideOne, sideTwo, sideThree)) {
+                triangle.setType(TriangleType.ISOSCELES);
+            } else if (isScalene(sideOne, sideTwo, sideThree)) {
+                triangle.setType(TriangleType.SCALENE);
+            }
+        } else {
+            triangle.setType(TriangleType.INVALID);
         }
+    }
+
+    private boolean isValidTriangle(Double sideOne, Double sideTwo, Double sideThree) {
+        return ( checkSideInequality(sideOne, sideTwo, sideThree)
+                && checkSideInequality(sideTwo, sideOne, sideThree)
+                && checkSideInequality(sideThree, sideTwo, sideOne));
+    }
+
+    private boolean checkSideInequality(Double hypotenuse, Double adjacent, Double opposite){
+        Double sidesSum = adjacent + opposite;
+        return sidesSum > hypotenuse ? false : true;
+
     }
 
     private boolean isEqualateral(Double sideOne, Double sideTwo, Double sideThree) {
