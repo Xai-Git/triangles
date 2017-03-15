@@ -29,14 +29,14 @@ public class TriangleCalcuatorStrategy implements TriangleCalculator{
     }
 
     private boolean isValidTriangle(Double sideOne, Double sideTwo, Double sideThree) {
-        return ( checkSideInequality(sideOne, sideTwo, sideThree)
+        return (checkSideInequality(sideOne, sideTwo, sideThree)
                 && checkSideInequality(sideTwo, sideOne, sideThree)
                 && checkSideInequality(sideThree, sideTwo, sideOne));
     }
 
     private boolean checkSideInequality(Double hypotenuse, Double adjacent, Double opposite){
         Double sidesSum = adjacent + opposite;
-        return sidesSum > hypotenuse ? false : true;
+        return sidesSum >= hypotenuse ? true : false;
 
     }
 

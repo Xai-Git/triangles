@@ -54,4 +54,19 @@ public class TrianglesApplicationTests {
 		assertEquals(triangle.getType(), TriangleType.SCALENE);
 	}
 
+	@Test
+	public void triangleThatFailsInequalityCheckIsNotValid() throws Exception {
+		Triangle triangle = new Triangle(1.5d, 1.5d, 4.5d);
+		triangleCalculator.determineTriangleType(triangle);
+		assertEquals(triangle.getType(), TriangleType.INVALID);
+
+		Triangle secondTriangle = new Triangle(4.5d, 1.5d, 1.5d);
+		triangleCalculator.determineTriangleType(secondTriangle);
+		assertEquals(secondTriangle.getType(), TriangleType.INVALID);
+
+		Triangle thirdTriangle = new Triangle(4.5d, 1.5d, 1.5d);
+		triangleCalculator.determineTriangleType(thirdTriangle);
+		assertEquals(thirdTriangle.getType(), TriangleType.INVALID);
+	}
+
 }
